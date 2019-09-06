@@ -3,6 +3,22 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 if(isset($_POST["erstellen"])){
+	if(file_exists("kommentar.txt")){
+		$dateiname = "kommentar.txt";
+		$datei = fopen($dateiname, "r");
+		$nummer = fread($datei, filesize($dateiname));
+		$knummer = intval($nummer);
+		fclose($datei);
+		$knummer = $knummer +1;
+		$datei=fopen("kommentar.txt","w+") or die("Konnte Datei nicht öffnen");
+		fwrite($datei,$knummer);
+		fclose($datei);
+	}else{
+		$datei=fopen("kommentar.txt","w+") or die("Konnte Datei nicht öffnen");
+		$knummer = 1;
+		fwrite($datei,$knummer);
+		fclose($datei);
+	}
 	if(file_exists("fnum.txt")){
 		$dateiname = "fnum.txt";
 		$datei = fopen($dateiname, "r");
@@ -80,7 +96,7 @@ if(isset($_POST["erstellen"])){
 					<br>
 					<br>
 					<article>
-						<p id=\"kopf\"><u><b>&lt;".date("d.m.Y H:i:s")."&gt; Anonymous</b></u></p>
+						<p id=\"kopf\"><u><b>&lt;".date("d.m.Y H:i:s")."&gt; Anonymous &gt;&gt;$knummer</b></u></p>
 						<p id=\"beschreib\">".$beschreib."</p>
 					</article></form></body></html>
 	";
