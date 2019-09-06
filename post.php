@@ -15,6 +15,7 @@ if(isset($_POST["post"])&&isset($_POST["antwort"])&&isset($_POST["thema"])){
 		//$antwort = implode("<br>",explode("\n",$antwort));
 		$antwort = implode("&lt;",explode("<",$antwort));
 		$antwort = implode("&gt;",explode(">",$antwort));
+		$antwort = implode("<br>",explode("\n",$antwort));
 		$inhalt = substr_replace($inhalt,"<article><p id=\"kopf\"><u><b>&lt;".date("d.m.Y H:i:s")."&gt; Anonymous</b></u></p><p>".$antwort."</p></article>",-2);
 		$datei=fopen($dateiname,"w+") or die("Konnte Datei nicht öffnen");
 		fwrite($datei,$inhalt);
