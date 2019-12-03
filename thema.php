@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-if(isset($_POST["erstellen"])){
+if(isset($_POST["erstellen"]) and isset($_POST["fbeschreib"]) and $_POST["fbeschreib"] != ""){
 	if(file_exists("kommentar.txt")){
 		$dateiname = "kommentar.txt";
 		$datei = fopen($dateiname, "r");
@@ -36,15 +36,16 @@ if(isset($_POST["erstellen"])){
 		$thema = fopen("$nummer.html","w+");
 	}
 	$beschreib = $_POST["fbeschreib"];
-	$beschreib = implode("&lt;",explode("<",$beschreib));
-	$beschreib = implode("&gt;",explode(">",$beschreib));
-	$beschreib = implode(" ",explode("\n",$beschreib));
-	$inhalt = "
-		<! DOCTYPE html>
-		<html lang=\"de\">
-			<head>
-				<meta charset=\"UTF-8\" />
-				<title>".$beschreib."</title>
+	if(strlen($beschreib)<=1024){
+		$beschreib = implode("&lt;",explode("<",$beschreib));
+		$beschreib = implode("&gt;",explode(">",$beschreib));
+		$beschreib = implode(" ",explode("\n",$beschreib));
+		$inhalt = "
+			<!DOCTYPE html>
+			<html lang=\"de\">
+				<head>
+					<meta charset=\"UTF-8\" />
+					<title>".$beschreib."</title>
 				<style>
 					body {
 						color: #006600;
@@ -99,8 +100,11 @@ if(isset($_POST["erstellen"])){
 						<p id=\"kopf\"><u><b>&lt;".date("d.m.Y H:i:s")."&gt; Anonymous &gt;&gt;$knummer</b></u></p>
 						<p id=\"beschreib\">".$beschreib."</p>
 					</article></form></body></html>
-	";
-	fwrite($thema,$inhalt);
-	header("Location: $nummer.html");
+		";
+		fwrite($thema,$inhalt);
+		header("Location: $nummer.html");
+	}
+}else{
+	header("Location:index.php");
 }
 ?>

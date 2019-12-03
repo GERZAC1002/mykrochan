@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 if(isset($_POST["post"])&&isset($_POST["antwort"])&&isset($_POST["thema"])){
-	if($_POST["antwort"]==""){
+	if(($_POST["antwort"]=="") and (strlen($_POST["antwort"]) > 20000) and (strlen($_POST["thema"])>1024) and ($_POST["thema"] == "")){
 		header("Location:".$_POST["thema"].".html");
 	}else{
 		if(file_exists("kommentar.txt")){
