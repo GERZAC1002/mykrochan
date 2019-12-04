@@ -5,10 +5,11 @@ error_reporting(E_ALL);
 if(!file_exists("data")){
 	mkdir("data");
 }
+$zusatz = "";
 if(isset($_POST["erstellen"]) and isset($_POST["fbeschreib"]) and $_POST["fbeschreib"] != ""){
-	if(($_FILES["dateihoch"]["size"] < 5000000) && !isset($_FILES["dateihoch"])){
+	if(($_FILES["dateihoch"]["size"] < 5000000) && isset($_FILES["dateihoch"])){
 		$dateihoch = "./data/".basename($_FILES["dateihoch"]["name"]);
-		$dateityp = strtolower(pathinfo($dateihoch,PATHINFO_EXTENSION));
+		$dateityp = strtolower(pathinfo($_FILES["dateihoch"]["name"],PATHINFO_EXTENSION));
 		if($dateityp != "php"){
 			while(file_exists($dateihoch)){
 				$dateihoch = rand(1000000000,999999999999).".".$dateityp;
@@ -39,7 +40,7 @@ if(isset($_POST["erstellen"]) and isset($_POST["fbeschreib"]) and $_POST["fbesch
 			//$zusatz = $zusatz."<p>Fehler bei dateigröße:".$_FILES["dateihoch"]["size"]."</p>";
 		}
 	}
-	//$zusatz = $zusatz."<br><p>Name:".$_FILES["dateihoch"]["name"]."<br>Größe:".$_FILES["dateihoch"]["size"]."<br>Dateityp:".$dateityp."</p>";
+	#$zusatz = $zusatz."<br><p>Name:".$_FILES["dateihoch"]["name"]."<br>Größe:".$_FILES["dateihoch"]["size"]."<br>Dateityp:".$dateityp."</p>";
 	$beschreib = $_POST["fbeschreib"];
 	if(strlen($beschreib)<=1024 and $fehler == 0){
 		if(file_exists("kommentar.txt")){

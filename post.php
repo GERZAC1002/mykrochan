@@ -6,9 +6,9 @@ if(isset($_POST["post"])&&isset($_POST["antwort"])&&isset($_POST["thema"])){
 	if(($_POST["antwort"]=="") and (strlen($_POST["antwort"]) > 20000) and (strlen($_POST["thema"])>1024) and ($_POST["thema"] == "")){
 		header("Location:".$_POST["thema"].".html");
 	}else{
-		if(($_FILES["dateihoch"]["size"] < 5000000) && !isset($_FILES["dateihoch"])){
+		if(($_FILES["dateihoch"]["size"] < 5000000) && isset($_FILES["dateihoch"])){
 			$dateihoch = "./data/".basename($_FILES["dateihoch"]["name"]);
-			$dateityp = strtolower(pathinfo($dateihoch,PATHINFO_EXTENSION));
+			$dateityp = strtolower(pathinfo($_FILES["dateihoch"]["name"],PATHINFO_EXTENSION));
 			if($dateityp != "php"){
 				while(file_exists($dateihoch)){
 					$dateihoch = rand(1000000000,999999999999).".".$dateityp;
@@ -16,8 +16,8 @@ if(isset($_POST["post"])&&isset($_POST["antwort"])&&isset($_POST["thema"])){
 				if(!file_exists($dateihoch)){
 					if(move_uploaded_file($_FILES["dateihoch"]["tmp_name"],$dateihoch)){
 						if($dateityp == "png" || $dateityp == "jpg" || $dateityp == "gif" || $dateityp == "jpeg"){
-							$zusatz = "<p><a target=\"_blank\" href=\"$dateihoch\"><img width=\"200\" height=\"200\" src=\"$dateihoch\"></img></a></p>";
-							}else{
+							$zusatz = "<p><a target=\"_blank\" href=\"$dateihoch\"><img width=\"100\" height=\"100\" src=\"$dateihoch\"></img></a></p>";
+						}else{
 							$zusatz = "<p><a target=\"_blank\" href=\"$dateihoch\">".$_FILES["dateihoch"]["name"]."</a></p>";
 						}
 						$fehler = 0;
