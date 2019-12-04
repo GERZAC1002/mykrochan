@@ -1,0 +1,42 @@
+body {
+	color: #006600;
+	background-color: #99ff99;
+}
+article {
+	width: 50%;
+	border: 5px solid #0000ff;
+	background-color: #ccffcc;
+	color: #000000;
+}
+b {
+	color:#0000FF;
+}
+#b {
+	width: 70%;
+	word-break: break-all;
+	border: 4px solid #006600;
+}
+#thema {
+	width: 10%;
+	border: 4px solid #006600;
+}
+table,tr {
+	border-collapse: collapse;
+	width: 90%;
+	border: 4px solid #006600;
+}
+textarea {
+	resize: none;
+	width:50%;
+	height: 50%;
+}
+input[type=file] {
+	border: none;
+	color: #006600;
+	cursor: pointer;
+}
+input[type=submit] {
+	width:250px;
+	text-decoration: none;
+	cursor: pointer;
+}

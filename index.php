@@ -4,42 +4,23 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 if(isset($_POST["thema"])){
 	echo "
-	<! DOCTYPE html>
+	<!DOCTYPE html>
 	<html lang=\"de\">
 		<head>
 			<meta charset=\"UTF-8\" />
 			<title>&#181;CHAN</title>
-			<style>
-				body {
-					color: #006600;
-					background-color: #99ff99;
-				}
-				article {
-					width: 50%;
-					border: 5px solid #0000ff;
-					background-color: #ccffcc;
-					color: #003300;
-				}
-				table {
-					width: 90%;
-					border: 4px solid;
-				}
-				textarea {
-					resize: none;
-					width: 70%;
-					font-size: 20px;
-					font-family: monospace;
-				}
-			</style>
+			<link rel=\"stylesheet\" href=\"style.css\">
 		</head>
 		<body>
-			<form action=\"thema.php\" method=post>
+			<form action=\"thema.php\" method=post enctype=\"multipart/form-data\">
 				<center>
 					<article>
 						<h1>Neues Thema</h1>
-						<p>Gebe das Thema ein</p>
+						<p>Gib das Thema ein</p>
 						<br>
 						<textarea autofocus name=\"fbeschreib\" rows=4 maxlength=254 placeholder=\"Hier Thema eintragen!(max. 254 Zeichen)\"></textarea>
+						<br>
+						<input type=\"file\" name=\"dateihoch\" id=\"dateihoch\">
 						<br>
 						<input type=\"submit\" name=\"erstellen\" value=\"Neues Thema\">
 					</article>
@@ -49,45 +30,20 @@ if(isset($_POST["thema"])){
 	</html>";
 }else{
 	echo "
-	<! DOCTYPE html>
+	<!DOCTYPE html>
 	<html lang=\"de\">
 		<head>
 			<meta charset=\"UTF-8\" />
 			<title>&#181;CHAN</title>
-			<style>
-				body {
-					color: #006600;
-					background-color: #99ff99;
-				}
-				article {
-					width: 50%;
-					border: 5px solid #0000ff;
-					background-color: #ccffcc;
-					color: #003300;
-				}
-				#b {
-					width: 70%;
-					word-break: break-all;
-					border: 4px solid #666666;
-				}
-				#thema {
-					width: 10%;
-					border: 4px solid #666666;
-				}
-				table,tr {
-					border-collapse: collapse;
-					width: 90%;
-					border: 1px solid #666666;
-				}
-			</style>
+			<link rel=\"stylesheet\" href=\"style.css\">
 		</head>
 		<body>
 			<form method=post>
 				<center>
 					<article>
-						<h1>&#181;CHAN v0.1 Startseite</h1>
+						<h1>&#181;CHAN v0.5 Startseite</h1>
 						<img src=\"chan.png\" height=\"50\" width=\"300\" />
-						<p>Ein winziges Bildbrett<br>ohne Bilder<br>ohne Javascript<br>also nicht zu viel erwarten</p>
+						<p>Ein winziges Bildbrett<br>ohne Javascript<br>also nicht zu viel erwarten</p>
 						<br>
 						<p><a href=\"./index.php\">[Aktualisieren]</a></p>
 						<br>
