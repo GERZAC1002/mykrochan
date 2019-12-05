@@ -6,7 +6,7 @@ if(isset($_POST["post"])&&isset($_POST["antwort"])&&isset($_POST["thema"])){
 	if(($_POST["antwort"]=="") and (strlen($_POST["antwort"]) > 20000) and (strlen($_POST["thema"])>1024) and ($_POST["thema"] == "")){
 		header("Location:".$_POST["thema"].".html");
 	}else{
-		if(($_FILES["dateihoch"]["size"] < 5000000) && isset($_FILES["dateihoch"])){
+		if(($_FILES["dateihoch"]["size"] < 5000000) && is_uploaded_file($_FILES['dateihoch']['tmp_name'])){
 			$dateihoch = "./data/".basename($_FILES["dateihoch"]["name"]);
 			$dateityp = strtolower(pathinfo($_FILES["dateihoch"]["name"],PATHINFO_EXTENSION));
 			if($dateityp != "php"){

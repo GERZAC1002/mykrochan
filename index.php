@@ -20,6 +20,8 @@ if(isset($_POST["thema"])){
 						<br>
 						<textarea autofocus name=\"fbeschreib\" rows=4 maxlength=254 placeholder=\"Hier Thema eintragen!(max. 254 Zeichen)\"></textarea>
 						<br>
+						<p>Maximale Dateigröße: &lt;5MB</p>
+						<br>
 						<input type=\"file\" name=\"dateihoch\" id=\"dateihoch\">
 						<br>
 						<input type=\"submit\" name=\"erstellen\" value=\"Neues Thema\">

@@ -7,7 +7,7 @@ if(!file_exists("data")){
 }
 $zusatz = "";
 if(isset($_POST["erstellen"]) and isset($_POST["fbeschreib"]) and $_POST["fbeschreib"] != ""){
-	if(($_FILES["dateihoch"]["size"] < 5000000) && isset($_FILES["dateihoch"])){
+	if(($_FILES["dateihoch"]["size"] < 5000000) && is_uploaded_file($_FILES['dateihoch']['tmp_name'])){
 		$dateihoch = "./data/".basename($_FILES["dateihoch"]["name"]);
 		$dateityp = strtolower(pathinfo($_FILES["dateihoch"]["name"],PATHINFO_EXTENSION));
 		if($dateityp != "php"){
@@ -98,6 +98,8 @@ if(isset($_POST["erstellen"]) and isset($_POST["fbeschreib"]) and $_POST["fbesch
 							<textarea autofocus name=\"antwort\" rows=5 maxlength=20000 placeholder=\"Hier Antwort eintragen!(max. 20000 Zeichen)\"></textarea>
 							<br>
 							<input type=\"file\" name=\"dateihoch\" id=\"dateihoch\">
+							<br>
+							<p>Maximale Dateigröße: &lt;5MB</p>
 							<br>
 							<input name=\"thema\" type=\"hidden\" value=\"$nummer\">
 							<input name=\"post\" type=\"submit\" value=\"Absenden\">
