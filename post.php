@@ -11,7 +11,7 @@ if(isset($_POST["post"])&&isset($_POST["antwort"])&&isset($_POST["thema"])){
 			$dateityp = strtolower(pathinfo($_FILES["dateihoch"]["name"],PATHINFO_EXTENSION));
 			if($dateityp != "php"){
 				while(file_exists($dateihoch)){
-					$dateihoch = rand(1000000000,999999999999).".".$dateityp;
+					$dateihoch = rand(1,getrandmax()).rand(1,getrandmax()).".".$dateityp;
 				}
 				if(!file_exists($dateihoch)){
 					if(move_uploaded_file($_FILES["dateihoch"]["tmp_name"],$dateihoch)){
@@ -65,7 +65,7 @@ if(isset($_POST["post"])&&isset($_POST["antwort"])&&isset($_POST["thema"])){
 			$antwort = implode("&lt;",explode("<",$antwort));
 			$antwort = implode("&gt;",explode(">",$antwort));
 			$antwort = implode("<br>",explode("\n",$antwort));
-			$inhalt = substr_replace($inhalt,"<article><p id=\"kopf\"><u><b>&lt;".date("d.m.Y H:i:s")."&gt; Anonymous &gt;&gt;$nummer</b></u></p><p>".$zusatz."</p><p>".$antwort."</p></article>",-2);
+			$inhalt = substr_replace($inhalt,"</article>\n<article><p id=\"kopf\"><u><b>&lt;".date("d.m.Y H:i:s")."&gt; Anonymous &gt;&gt;$nummer</b></u></p><p>".$zusatz."</p><p>".$antwort."</p></article>",-10);
 			$datei=fopen($dateiname,"w+") or die("Konnte Datei nicht öffnen");
 			fwrite($datei,$inhalt);
 			fclose($datei);
