@@ -44,7 +44,7 @@ if(isset($_POST["thema"])){
 				<center>
 					<article>
 						<h1>&#181;CHAN v0.5 Startseite</h1>
-						<img src=\"chan.png\" height=\"50\" width=\"300\" />
+						<img src=\"chan2020.png\" height=\"50\" width=\"300\" />
 						<p>Ein winziges Bildbrett<br>ohne Javascript<br>also nicht zu viel erwarten</p>
 						<br>
 						<p><a href=\"./index.php\">[Aktualisieren]</a></p>
