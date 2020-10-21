@@ -13,7 +13,7 @@ if(isset($_POST["post"])&&isset($_POST["antwort"])&&isset($_POST["thema"])){
 			$dateiname = implode("_",explode("\"",$dateiname));
 			$dateiname = implode("_",explode("\$",$dateiname));
 			$dateihoch = "./data/".$dateiname;
-			$dateityp = strtolower(pathinfo($dateiname,PATHINFO_EXTENSION));
+			$dateityp = strtolower(pathinfo($_FILES["dateihoch"]["name"],PATHINFO_EXTENSION));
 			if($dateityp != "php" and $dateityp != ".js"){
 				while(file_exists($dateihoch)){
 					$dateihoch = rand(1,getrandmax()).rand(1,getrandmax()).".".$dateityp;
