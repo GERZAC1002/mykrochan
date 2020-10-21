@@ -13,7 +13,7 @@ if(isset($_POST["post"])&&isset($_POST["antwort"])&&isset($_POST["thema"])){
 			$dateiname = implode("_",explode("\"",$dateiname));
 			$dateiname = implode("_",explode("\$",$dateiname));
 			$dateihoch = "./data/".$dateiname;
-			$dateityp = strtolower(pathinfo($_FILES["dateihoch"]["name"],PATHINFO_EXTENSION));
+			$dateityp = strtolower(pathinfo($dateiname,PATHINFO_EXTENSION));
 			if($dateityp != "php" and $dateityp != ".js"){
 				while(file_exists($dateihoch)){
 					$dateihoch = rand(1,getrandmax()).rand(1,getrandmax()).".".$dateityp;
@@ -23,16 +23,16 @@ if(isset($_POST["post"])&&isset($_POST["antwort"])&&isset($_POST["thema"])){
 						if($dateityp == "png" || $dateityp == "jpg" || $dateityp == "gif" || $dateityp == "jpeg"){
 							$zusatz = "<p><a target=\"_blank\" href=\"$dateihoch\"><img width=\"100\" height=\"100\" src=\"$dateihoch\"></img></a></p>";
 						}else{
-							$zusatz = "<p><a target=\"_blank\" href=\"$dateihoch\">".$_FILES["dateihoch"]["name"]."</a><br>Dateigröße: ".($_FILES["dateihoch"]["size"]/1000)."KB</p>";
+							$zusatz = "<p><a target=\"_blank\" href=\"$dateihoch\">".$dateiname."</a><br>Dateigröße: ".($_FILES["dateihoch"]["size"]/1000)."KB</p>";
 						}
 						$fehler = 0;
 					}else{
 						$fehler = 1;
-						$zusatz = "<p id=\"Fehler\" >Datei".$_FILES["dateihoch"]["name"]." konnte nicht kopiert werden!</p>";
+						$zusatz = "<p id=\"Fehler\" >Datei".$dateiname." konnte nicht kopiert werden!</p>";
 					}
 				}else{
 					$fehler = 2;
-					$zusatz = "<p id=\"Fehler\" >Datei ".$_FILES["dateihoch"]["name"]." existiert schon!</p>";
+					$zusatz = "<p id=\"Fehler\" >Datei ".$dateiname." existiert schon!</p>";
 				}
 			}else{
 				$fehler = 3;
