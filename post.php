@@ -8,22 +8,27 @@ if(isset($_POST["post"])&&isset($_POST["antwort"])&&isset($_POST["thema"])){
 		header("Location:fehlerseiten/Fehler0.html");
 	}else{
 		if(($_FILES["dateihoch"]["size"] > 0) && ($_FILES["dateihoch"]["size"] < 5000000) && is_uploaded_file($_FILES['dateihoch']['tmp_name'])){
-			$dateimname = basename($_FILES["dateihoch"]["mame"]);
+			$dateiname = basename($_FILES["dateihoch"]["name"]);
 			$dateiname = implode("_",explode("\\",$dateiname));
 			$dateiname = implode("_",explode("\"",$dateiname));
 			$dateiname = implode("_",explode("\$",$dateiname));
-			$dateihoch = "./data/".$dateiname;
 			$dateityp = strtolower(pathinfo($_FILES["dateihoch"]["name"],PATHINFO_EXTENSION));
-			if($dateityp != "php" and $dateityp != ".js"){
+			$dateihoch = "./data/".$dateiname;
+			if($dateityp != "php" and $dateityp != "js"){
 				while(file_exists($dateihoch)){
-					$dateihoch = rand(1,getrandmax()).rand(1,getrandmax()).".".$dateityp;
+					$dateiname = rand(1,getrandmax()).rand(1,getrandmax());
+					if($dateityp == ""){
+						$dateihoch = "./data/".$dateiname;
+					}else{
+						$dateihoch = "./data/".$dateiname.".".$dateityp;
+					}
 				}
 				if(!file_exists($dateihoch)){
 					if(move_uploaded_file($_FILES["dateihoch"]["tmp_name"],$dateihoch)){
 						if($dateityp == "png" || $dateityp == "jpg" || $dateityp == "gif" || $dateityp == "jpeg"){
 							$zusatz = "<p><a target=\"_blank\" href=\"$dateihoch\"><img width=\"100\" height=\"100\" src=\"$dateihoch\"></img></a></p>";
 						}else{
-							$zusatz = "<p><a target=\"_blank\" href=\"$dateihoch\">".$dateiname."</a><br>Dateigröße: ".($_FILES["dateihoch"]["size"]/1000)."KB</p>";
+							$zusatz = "<p><a target=\"_blank\" href=\"$dateihoch\">".$dateiname."</a><br>Dateiendung:".$dateityp."<br>Dateigröße: ".($_FILES["dateihoch"]["size"]/1000)."KB</p>";
 						}
 						$fehler = 0;
 					}else{
