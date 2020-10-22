@@ -12,6 +12,9 @@ if(isset($_POST["post"])&&isset($_POST["antwort"])&&isset($_POST["thema"])){
 			$dateiname = implode("_",explode("\\",$dateiname));
 			$dateiname = implode("_",explode("\"",$dateiname));
 			$dateiname = implode("_",explode("\$",$dateiname));
+			$dateiname = implode("_",explode("<",$dateiname));
+			$dateiname = implode("_",explode(">",$dateiname));
+			$dateiname = implode("_",explode(" ",$dateiname));
 			$dateityp = strtolower(pathinfo($_FILES["dateihoch"]["name"],PATHINFO_EXTENSION));
 			$dateihoch = "./data/".$dateiname;
 			if($dateityp != "php" and $dateityp != "js"){
