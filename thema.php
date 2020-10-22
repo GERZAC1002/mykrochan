@@ -31,7 +31,7 @@ if(isset($_POST["erstellen"]) and isset($_POST["fbeschreib"]) and $_POST["fbesch
 					if($dateityp == "png" || $dateityp == "jpg" || $dateityp == "gif" || $dateityp == "jpeg"){
 						$zusatz = "<p><a target=\"_blank\" href=\"$dateihoch\"><img width=\"200\" height=\"200\" src=\"$dateihoch\"></img></a></p>";
 					}else{
-						$zusatz = "<p><a target=\"_blank\" href=\"$dateihoch\">".$_FILES["dateihoch"]["name"]."</a></p>";
+						$zusatz = "<p><a target=\"_blank\" href=\"$dateihoch\">".$dateiname."</a></p>";
 					}
 					$fehler = 0;
 				}else{
