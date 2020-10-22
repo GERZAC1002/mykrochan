@@ -8,8 +8,20 @@ if(!file_exists("data")){
 $zusatz = "";
 if(isset($_POST["erstellen"]) and isset($_POST["fbeschreib"]) and $_POST["fbeschreib"] != ""){
 	if(($_FILES["dateihoch"]["size"] < 5000000) && is_uploaded_file($_FILES['dateihoch']['tmp_name'])){
-		$dateihoch = "./data/".basename($_FILES["dateihoch"]["name"]);
+		//$dateihoch = "./data/".basename($_FILES["dateihoch"]["name"]);
+		//$dateityp = strtolower(pathinfo($_FILES["dateihoch"]["name"],PATHINFO_EXTENSION));
+		$dateiname = basename($_FILES["dateihoch"]["name"]);
+		$dateiname = implode("_",explode("\\",$dateiname));
+		$dateiname = implode("_",explode("\"",$dateiname));
+		$dateiname = implode("_",explode("\$",$dateiname));
+		$dateiname = implode("_",explode("<",$dateiname));
+		$dateiname = implode("_",explode(">",$dateiname));
+		$dateiname = implode("_",explode(" ",$dateiname));
 		$dateityp = strtolower(pathinfo($_FILES["dateihoch"]["name"],PATHINFO_EXTENSION));
+		$dateityp = implode("_",explode("<",$dateityp));
+		$dateityp = implode("_",explode(">",$dateityp));
+		$dateityp = implode("_",explode("\"",$dateityp));
+		$dateihoch = "./data/".$dateiname;
 		if($dateityp != "php"){
 			while(file_exists($dateihoch)){
 				$dateihoch = rand(1000000000,999999999999).".".$dateityp;
